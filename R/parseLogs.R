@@ -43,8 +43,6 @@ parseLogDetailsToInstance <- function(details) {
   pattern <- "\\[instance = (\\d+)\\]"
 
   lapply(details, function(row_details){
-    # Initialize empty list
-    result <- '1'
     if (grepl(pattern, row_details)) {
       return(sub(pattern, "\\1", regmatches(row_details, gregexpr(pattern, row_details))[[1]]))
     }
