@@ -8,6 +8,8 @@ rcUtils is an R library providing utility functions for parsing and analyzing lo
 Extracts key-value pairs from log details.
 ### parseLogDetailsToInstance
 Extracts instance numbers from log details.
+### logFilter
+Filters log actions based on specified types.
 
 ## Installation
 ```R
@@ -33,10 +35,16 @@ log$detailObj <- parseLogDetails(log$details)
 # Extract instance numbers
 log$instance <- parseLogDetailsToInstance(log$details)
 
+# Filter log actions
+types <- c("manage", "export")
+selected <- logFilter(log$actions, types)
+log[selected,]
+
 ```
 ## Features
   * parseLogDetails: Extracts key-value pairs from log details.
   * parseLogDetailsToInstance: Extracts instance numbers from log details.
+  * logFilter: Filters log actions based on specified types.
 
 ## Contributing
 Contributions are welcome! Please submit issues or pull requests on GitHub.
