@@ -46,6 +46,9 @@ log[selected,]
   * parseLogDetailsToInstance: Extracts instance numbers from log details.
   * logFilter: Filters log actions based on specified types.
 
+## Documentation
+For detailed documentation, visit our [Wiki](https://github.com/jubilee2/rcUtils/wiki).
+
 ## Contributing
 Contributions are welcome! Please submit issues or pull requests on GitHub.
 
