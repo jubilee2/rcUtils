@@ -1,30 +1,32 @@
 \name{parseLogDetails}
 \alias{parseLogDetails}
-\title{Parse Log Details}
+\title{Parse Log Details (Deprecated)}
 \description{
-  Parse log details into a list of key-value pairs.
+Parse log details into a list of key-value pairs.
+Deprecation Notice
+This function is deprecated since version 0.3.0. Use \code{logDetailsParseRecord()} instead.
 }
 \usage{
-  parseLogDetails(details)
+parseLogDetails(details)
 }
 \arguments{
-  \item{details}{Character string containing log details.}
+\item{details}{Character string containing log details.}
 }
 \value{
-  A list of key-value pairs parsed from the log details.
+A list of key-value pairs parsed from the log details.
 }
 \examples{
-  # Example usage
-  log_details <- "name = 'John', age = '30', hobbies(1) = checked"
-  parsed_details <- parseLogDetails(log_details)
-  print(parsed_details)
+Example usage
+log_details <- "name = 'John', age = '30', hobbies(1) = checked"
+parsed_details <- logDetailsParseRecord(log_details)
+print(parsed_details)
 }
 \seealso{
-  # Optional: related functions or packages
+\code{logDetailsParseRecord()}
 }
 \author{
-  Lynne & Jubilee
+Lynne & Jubilee
 }
-\note{
-  # Optional: additional notes or warnings
+\deprecated{
+Use \code{logDetailsParseRecord()} instead.
 }
