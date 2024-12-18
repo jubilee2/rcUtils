@@ -51,3 +51,25 @@ logDetailsParseRecordInstance <- function(details) {
     }
   })
 }
+
+logDetailsParseDQ <- function(details) {
+  dq_log_selctor <- grepl("^(Open|Respond to|Send|Close) data query", details)
+
+  pattern <- ',\\s(?=(?:[^"]|"[^"]*")*$)'
+
+  actions <- sub("\\s?\\(.*$", "", details)
+  info <- gsub("^[^\\(]+\\(|\\)$", "", details)
+  info <- paste0("Action: ", actions, ", ", info)
+  info[!dq_log_selctor] <- ''
+  pairs <- strsplit(info, pattern, perl = TRUE)
+
+  lapply(pairs, function(x) {
+    kv <- strsplit(x, ': (?=(?:[^"]|"[^"]*")*$)', perl = TRUE)
+    kv <- lapply(kv, function(x) gsub('^"|"$', "", x))
+
+    as.list(setNames(
+      unlist(lapply(kv, "[", 2)),
+      unlist(lapply(kv, "[", 1))
+    ))
+  })
+}
