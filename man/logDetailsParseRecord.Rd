@@ -1,13 +1,11 @@
-\name{parseLogDetails}
-\alias{parseLogDetails}
-\title{Parse Log Details (Deprecated)}
+\name{logDetailsParseRecord}
+\alias{logDetailsParseRecord}
+\title{Parse Log Details into Key-Value Pairs}
 \description{
-Parse log details into a list of key-value pairs.
-Deprecation Notice
-This function is deprecated since version 0.3.0. Use \code{logDetailsParseRecord()} instead.
+Parse log details into a list of key-value pairs, handling checkboxes and instance numbers.
 }
 \usage{
-parseLogDetails(details)
+logDetailsParseRecord(details)
 }
 \arguments{
 \item{details}{Character string containing log details.}
@@ -21,11 +19,11 @@ parsed_details <- logDetailsParseRecord(log_details)
 print(parsed_details)
 }
 \seealso{
-\code{logDetailsParseRecord()}
+\code{logDetailsParseRecordInstance()}
 }
 \author{
 Lynne & Jubilee
 }
 \note{
-Use \code{logDetailsParseRecord()} instead.
+Replaces deprecated parseLogDetails() function.
 }
