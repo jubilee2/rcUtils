@@ -78,3 +78,94 @@ test_that("logDetailsParseRecordInstance returns '1' for NA details", {
   expected <- list("1")
   expect_equal(result, expected)
 })
+
+
+
+# Test case 1: Valid data query
+test_that("logDetailsParseDQ parses valid data query", {
+  test_details <- c('Open data query (Record: 1, Event: "Event 1")')
+  result <- logDetailsParseDQ(test_details)
+  expected <- list(
+    list(
+      Action = "Open data query",
+      Record = "1",
+      Event = "Event 1"
+    )
+  )
+  expect_equal(result, expected)
+})
+
+# Test case 2: Multiple valid data queries
+test_that("logDetailsParseDQ parses multiple valid data queries", {
+  test_details <- c(
+    "Open data query (Record: 1, Event: \"Event 1\")",
+    "Respond to data query (Record: 2, Event: \"Event 2\")"
+  )
+  result <- logDetailsParseDQ(test_details)
+  expected <- list(
+    list(
+      Action = "Open data query",
+      Record = "1",
+      Event = "Event 1"
+    ),
+    list(
+      Action = "Respond to data query",
+      Record = "2",
+      Event = "Event 2"
+    )
+  )
+  expect_equal(result, expected)
+})
+
+# Test case 3: Invalid data query
+test_that("logDetailsParseDQ returns empty list for invalid data query", {
+  test_details <- c("Invalid log message")
+  result <- logDetailsParseDQ(test_details)
+  expected <- list(list())
+  expect_equal(result, expected)
+})
+
+# Test case 4: NA details
+test_that("logDetailsParseDQ returns empty list for NA details", {
+  test_details <- c(NA)
+  result <- logDetailsParseDQ(test_details)
+  expected <- list(list())
+  expect_equal(result, expected)
+})
+
+# Test case 5: Empty string
+test_that("logDetailsParseDQ returns empty list for empty string", {
+  test_details <- c("")
+  result <- logDetailsParseDQ(test_details)
+  expected <- list(list())
+  expect_equal(result, expected)
+})
+
+# Test case 6: Edge case - quoted value
+test_that("logDetailsParseDQ handles quoted values", {
+  test_details <- c("Open data query (Record: 1, Event: \"Event 1, with comma\")")
+  result <- logDetailsParseDQ(test_details)
+  expected <- list(
+    list(
+      Action = "Open data query",
+      Record = "1",
+      Event = "Event 1, with comma"
+    )
+  )
+  expect_equal(result, expected)
+})
+
+# Test case 7: Edge case - multiple quoted values
+test_that("logDetailsParseDQ handles multiple quoted values", {
+  test_details <- c("Open data query (Record: 1, Event: \"Event 1, with comma\", Description: \"Desc 1\")")
+  result <- logDetailsParseDQ(test_details)
+  expected <- list(
+    list(
+      Action = "Open data query",
+      Record = "1",
+      Event = "Event 1, with comma",
+      Description = "Desc 1"
+    )
+  )
+  expect_equal(result, expected)
+})
