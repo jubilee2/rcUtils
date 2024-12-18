@@ -16,7 +16,6 @@ parseLogDetails(details)
 A list of key-value pairs parsed from the log details.
 }
 \examples{
-Example usage
 log_details <- "name = 'John', age = '30', hobbies(1) = checked"
 parsed_details <- logDetailsParseRecord(log_details)
 print(parsed_details)

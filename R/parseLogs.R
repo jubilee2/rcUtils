@@ -1,11 +1,11 @@
 
-parseLogDetails <- function(...) {
+parseLogDetails <- function(details) {
   .Deprecated("logDetailsParseRecord")
-  logDetailsParseRecord(...)
+  logDetailsParseRecord(details)
 
 }
 
 parseLogDetailsToInstance <- function(details) {
   .Deprecated("logDetailsParseRecordInstance")
-  logDetailsParseRecordInstance(...)
+  logDetailsParseRecordInstance(details)
 }
