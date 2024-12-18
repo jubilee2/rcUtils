@@ -64,6 +64,10 @@ logDetailsParseDQ <- function(details) {
   pairs <- strsplit(info, pattern, perl = TRUE)
 
   lapply(pairs, function(x) {
+    if (length(x) == 1 && x == "") {
+      return(list())
+    }
+
     kv <- strsplit(x, ': (?=(?:[^"]|"[^"]*")*$)', perl = TRUE)
     kv <- lapply(kv, function(x) gsub('^"|"$', "", x))
 
