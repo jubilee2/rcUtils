@@ -25,6 +25,6 @@ result <- logDetailsParseRecordInstance(log_details)
 \author{
 Lynne & Jubilee
 }
-\deprecated{
+\note{
 Use \code{logDetailsParseRecordInstance()} instead.
 }

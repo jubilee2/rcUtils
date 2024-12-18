@@ -27,6 +27,6 @@ print(parsed_details)
 \author{
 Lynne & Jubilee
 }
-\deprecated{
+\note{
 Use \code{logDetailsParseRecord()} instead.
 }

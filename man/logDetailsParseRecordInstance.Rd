@@ -25,11 +25,5 @@ print(instance_numbers)
 Lynne & Jubilee
 }
 \note{
-Replaces deprecated \code{parseLogDetailsToInstance()} function.
+Replaces deprecated parseLogDetailsToInstance() function.
 }
-Details
-This function uses regular expressions to extract instance numbers from log details. If no instance number is found, it defaults to '1'.
-Return Value
-A character vector of instance numbers.
-Replacement for
-\code{parseLogDetailsToInstance()} (deprecated since version 0.3.0)
