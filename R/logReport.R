@@ -1,13 +1,21 @@
 queryLogSummary <- function(logs) {
-  # Function implementation
-  o <- logDetailsParseDQ(logs$details)
-  logs$Action <- sapply(o, function(x) if (is.null(x$Action)) NA else x$Action)
-  logs$Record <- sapply(o, function(x) if (is.null(x$Record)) NA else x$Record)
-  logs$Event <- sapply(o, function(x) if (is.null(x$Event)) NA else x$Event)
-  logs$Field <- sapply(o, function(x) if (is.null(x$Field)) NA else x$Field)
-  logs$Comment <- sapply(o, function(x) if (is.null(x$Comment)) NA else x$Comment)
-  logs$`Data Quality Rule` <- sapply(o, function(x) if (is.null(x$`Data Quality Rule`)) NA else x$`Data Quality Rule`)
+  # Parse the log details for data quality
+  parsedDetails <- logDetailsParseDQ(logs$details)
 
-  selector <- sapply(o, length) > 0
+  # Function to extract a specific field from a list of details
+  # details: list of parsed log details
+  # field: the field to extract from each detail
+  applyExtractField <- function(details, field) {
+    vapply(details, function(x) ifelse(is.null(x[[field]]), NA_character_, x[[field]]), FUN.VALUE = character(1))
+  }
+
+  logs$Action <- applyExtractField(parsedDetails, "Action")
+  logs$Record <- applyExtractField(parsedDetails, "Record")
+  logs$Event <- applyExtractField(parsedDetails, "Event")
+  logs$Field <- applyExtractField(parsedDetails, "Field")
+  logs$Comment <- applyExtractField(parsedDetails, "Comment")
+  logs$`Data Quality Rule` <- applyExtractField(parsedDetails, "Data Quality Rule")
+
+  selector <- sapply(parsedDetails, length) > 0
   logs[selector,c("timestamp", "username", "Action","Record","Event","Field","Data Quality Rule","Comment")]
 }
