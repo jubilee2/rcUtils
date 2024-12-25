@@ -2,9 +2,9 @@
 
 # Test case 1: Simple key-value pair
 test_that("logDetailsParseRecord works for simple key-value pair", {
-  test_details <- "name = 'John', age = '30'"
+  test_details <- "name = 'John', age = '30', foo = 'ii'i'"
   result <- logDetailsParseRecord(test_details)[[1]]
-  expected <- list(name = "John", age = "30")
+  expected <- list(name = "John", age = "30", foo = "ii'i")
   expect_equal(result, expected)
 })
 
@@ -18,9 +18,9 @@ test_that("logDetailsParseRecord works for checkbox key-value pair", {
 
 # Test case 3: Mixed key-value pairs
 test_that("logDetailsParseRecord works for mixed key-value pairs", {
-  test_details <- "name = 'Jane', hobbies(1) = checked, age = '25', hobbies(2) = unchecked"
+  test_details <- "name = 'Jane', hobbies(1) = checked, age = '25', foo = 'ii'i', hobbies(2) = unchecked"
   result <- logDetailsParseRecord(test_details)[[1]]
-  expected <- list(name = "Jane", hobbies___1 = "1", age = "25", hobbies___2 = "0")
+  expected <- list(name = "Jane", hobbies___1 = "1", age = "25", foo = "ii'i", hobbies___2 = "0")
   expect_equal(result, expected)
 })
 
@@ -28,6 +28,11 @@ test_that("logDetailsParseRecord works for mixed key-value pairs", {
 test_that("logDetailsParseRecord warns for unparseable content", {
   test_details <- "name = 'Bob', invalid_content"
   expect_warning(logDetailsParseRecord(test_details), "unparseable content")
+})
+
+test_that("logDetailsParseRecord handles trailing comma", {
+  test_details <- "name = 'John', age = '30',"
+  expect_warning(result<-logDetailsParseRecord(test_details), "unparseable content")
 })
 
 # Test case 5: Empty input
