@@ -1,9 +1,9 @@
 
 logDetailsParseRecord <- function(details) {
-  pairs <- strsplit(details, ",(?=[^']*(?:'[^']*'[^']*)*$)", perl = TRUE)
+  pairs <- strsplit(details, "(?<='| = unchecked| = checked), (?=[\\w]+ = '|[\\w()]+ = )", perl = TRUE)
 
-  pattern <- "(\\w+) = '(.*)'"
-  pattern_checkbox <- "(\\w+)\\((\\d+)\\) = (unchecked|checked)"
+  pattern <- "^(\\w+) = '(.*)'$"
+  pattern_checkbox <- "^(\\w+)\\((\\d+)\\) = (unchecked|checked)$"
 
   lapply(pairs, function(row_pairs){
     # Initialize empty list
@@ -32,7 +32,7 @@ logDetailsParseRecord <- function(details) {
         result[[key]] <- value
       } else if(grepl("(Erase all data|\\[instance = \\d+\\]|\\[Erase survey responses and start survey over\\])", pair)) {
       } else {
-        warning(paste("During parse logging details, encountered unparseable content:", pair))
+        warning(paste('During parse logging details, encountered unparseable content: "', pair, '"'))
       }
     }
     return(result)
