@@ -32,7 +32,7 @@ logDetailsParseRecord <- function(details) {
         result[[key]] <- value
       } else if(grepl("(Erase all data|\\[instance = \\d+\\]|\\[Erase survey responses and start survey over\\])", pair)) {
       } else {
-        warning(paste('During parse logging details, encountered unparseable content: "', pair, '"'))
+        warning(paste('In function logDetailsParseRecord: encountered unparseable content: "', pair, '"'))
       }
     }
     return(result)
@@ -53,14 +53,14 @@ logDetailsParseRecordInstance <- function(details) {
 }
 
 logDetailsParseDQ <- function(details) {
-  dq_log_selctor <- grepl("^(Open|Respond to|Send|Close) data query", details)
+  dq_log_selector <- grepl("^(Open|Respond to|Send|Close) data query", details)
 
   pattern <- ',\\s(?=(?:[^"]|"[^"]*")*$)'
 
   actions <- sub("\\s?\\(.*$", "", details)
   info <- gsub("^[^\\(]+\\(|\\)$", "", details)
   info <- paste0("Action: ", actions, ", ", info)
-  info[!dq_log_selctor] <- ''
+  info[!dq_log_selector] <- ''
   pairs <- strsplit(info, pattern, perl = TRUE)
 
   lapply(pairs, function(x) {
@@ -68,6 +68,7 @@ logDetailsParseDQ <- function(details) {
       return(list())
     }
 
+    # Split the string by ': ' but only if it is not inside quotes
     kv <- strsplit(x, ': (?=(?:[^"]|"[^"]*")*$)', perl = TRUE)
     kv <- lapply(kv, function(x) gsub('^"|"$', "", x))
 
