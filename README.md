@@ -10,8 +10,6 @@ rcUtils is an R library providing utility functions for parsing and analyzing lo
   * logFilter: Filters log actions based on specified types.
   * queryLogSummary: Summarizes query logs by extracting relevant information.
 
-### queryLogSummary
-
 ## Installation
 ```r
 # Install from GitHub
