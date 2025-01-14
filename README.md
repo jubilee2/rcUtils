@@ -2,21 +2,16 @@
 
 ## Overview
 rcUtils is an R library providing utility functions for parsing and analyzing log data.
-## Functions
-### logDetailsParseDQ
-Parses data query log details into a structured format.
 
-### logDetailsParseRecord
-Extracts key-value pairs from log details.
-
-### logDetailsParseRecordInstance
-Extracts instance numbers from log details.
-
-### logFilter
-Filters log actions based on specified types.
+## Features
+  * logDetailsParseDQ: Parses data query log details into a structured format.
+  * logDetailsParseRecord: Extracts key-value pairs from log details.
+  * logDetailsParseRecordInstance: Extracts instance numbers from log details.
+  * logFilter: Filters log actions based on specified types.
+  * queryLogSummary: Summarizes query logs by extracting relevant information.
 
 ### queryLogSummary
-Summarizes query logs by extracting relevant information.
+
 ## Installation
 ```r
 # Install from GitHub
@@ -55,12 +50,7 @@ selected <- logFilter(log$actions, types)
 log[selected,]
 
 ```
-## Features
-  * logDetailsParseDQ: Parses data query log details into a structured format.
-  * logDetailsParseRecord: Extracts key-value pairs from log details.
-  * logDetailsParseRecordInstance: Extracts instance numbers from log details.
-  * logFilter: Filters log actions based on specified types.
-  * queryLogSummary: Summarizes query logs.
+
 ## Documentation
 For detailed documentation, visit our [Wiki](https://github.com/jubilee2/rcUtils/wiki).
 
