@@ -1,3 +1,9 @@
+## Version 0.4.2
+
+### New Features
+
+* Added support for `data.frame` output format in `logDetailsParseRecord()`.
+
 ## Version 0.3.0
 
 ### Deprecated Functions
