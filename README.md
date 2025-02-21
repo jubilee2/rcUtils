@@ -35,9 +35,14 @@ log <- data.frame(
 summary <- queryLogSummary(log)
 print(summary)
 
-# Parse log details
+# Parse log details with default output format (list)
 log$detailObj <- logDetailsParseRecord(log$details)
-log$detailObj <- logDetailsParseDQ(log$details)
+
+# Parse log details with data.frame output format
+log$detailObj_df <- logDetailsParseRecord(log$details, output_format = "data.frame")
+
+# Parse data query log details
+log$detailObj_dq <- logDetailsParseDQ(log$details)
 
 # Extract instance numbers
 log$instance <- logDetailsParseRecordInstance(log$details)
