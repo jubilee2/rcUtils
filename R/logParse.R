@@ -1,5 +1,5 @@
 
-logDetailsParseRecord <- function(details) {
+logDetailsParseRecord <- function(details, output_format = "list") {
   pairs <- strsplit(details, "(?<='| = unchecked| = checked), (?=[\\w]+ = '|[\\w()]+ = )", perl = TRUE)
 
   pattern <- "^(\\w+) = '(.*)'$"
@@ -35,7 +35,16 @@ logDetailsParseRecord <- function(details) {
         warning(paste('In function logDetailsParseRecord: encountered unparseable content: "', pair, '"'))
       }
     }
-    return(result)
+    
+    if (output_format == "data.frame") {
+      if (length(result) > 0) {
+        return(as.data.frame(do.call(rbind, lapply(names(result), function(k) c(field = k, value = result[[k]]))), stringsAsFactors = FALSE))
+      } else {
+        return(data.frame(field = character(), value = character(), stringsAsFactors = FALSE))
+      }
+    } else {
+      return(result)
+    }
   })
 }
 
