@@ -7,8 +7,9 @@ rcUtils is an R library providing utility functions for parsing and analyzing lo
   * logDetailsParseDQ: Parses data query log details into a structured format.
   * logDetailsParseRecord: Extracts key-value pairs from log details.
   * logDetailsParseRecordInstance: Extracts instance numbers from log details.
-  * logFilter: Filters log actions based on specified types.
-  * queryLogSummary: Summarizes query logs by extracting relevant information.
+  * **logFilter**: Filters log actions based on specified types.
+  * **queryLogSummary**: Summarizes query logs by extracting relevant information.
+  * **logDataTransformer**: Transforms log data into a structured data frame.
 
 ## Installation
 ```r
@@ -30,6 +31,11 @@ log <- data.frame(
     "[instance = 123] name = 'Jane', age = '25', hobbies(2) = unchecked"
   )
 )
+
+# Transform log data
+transformed_log <- logDataTransformer(log)
+print(transformed_log)
+
 
 # Summarize query logs
 summary <- queryLogSummary(log)

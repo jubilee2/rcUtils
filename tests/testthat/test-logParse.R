@@ -4,7 +4,7 @@
 test_that("logDetailsParseRecord works for simple key-value pair with data.frame output", {
   test_details <- "name = 'John', age = '30', foo = 'ii'i'"
   result <- logDetailsParseRecord(test_details, output_format = "data.frame")[[1]]
-  expected <- data.frame(field = c("name", "age", "foo"), value = c("John", "30", "ii'i"), stringsAsFactors = FALSE)
+  expected <- data.frame(variable = c("name", "age", "foo"), value = c("John", "30", "ii'i"), stringsAsFactors = FALSE)
   expect_equal(result, expected)
 })
 
@@ -12,7 +12,7 @@ test_that("logDetailsParseRecord works for simple key-value pair with data.frame
 test_that("logDetailsParseRecord works for checkbox key-value pair with data.frame output", {
   test_details <- "hobbies(1) = checked, hobbies(2) = unchecked"
   result <- logDetailsParseRecord(test_details, output_format = "data.frame")[[1]]
-  expected <- data.frame(field = c("hobbies___1", "hobbies___2"), value = c("1", "0"), stringsAsFactors = FALSE)
+  expected <- data.frame(variable = c("hobbies___1", "hobbies___2"), value = c("1", "0"), stringsAsFactors = FALSE)
   expect_equal(result, expected)
 })
 
@@ -20,7 +20,7 @@ test_that("logDetailsParseRecord works for checkbox key-value pair with data.fra
 test_that("logDetailsParseRecord works for mixed key-value pairs with data.frame output", {
   test_details <- "name = 'Jane', hobbies(1) = checked, age = '25', foo = 'ii'i', hobbies(2) = unchecked"
   result <- logDetailsParseRecord(test_details, output_format = "data.frame")[[1]]
-  expected <- data.frame(field = c("name", "hobbies___1", "age", "foo", "hobbies___2"), value = c("Jane", "1", "25", "ii'i", "0"), stringsAsFactors = FALSE)
+  expected <- data.frame(variable = c("name", "hobbies___1", "age", "foo", "hobbies___2"), value = c("Jane", "1", "25", "ii'i", "0"), stringsAsFactors = FALSE)
   expect_equal(result, expected)
 })
 
@@ -34,7 +34,7 @@ test_that("logDetailsParseRecord warns for unparseable content with data.frame o
 test_that("logDetailsParseRecord returns empty data.frame for empty input", {
   test_details <- ""
   result <- logDetailsParseRecord(test_details, output_format = "data.frame")[[1]]
-  expected <- data.frame(field = character(0), value = character(0), stringsAsFactors = FALSE)
+  expected <- data.frame(variable = character(0), value = character(0), stringsAsFactors = FALSE)
   expect_equal(result, expected)
 })
 
@@ -87,14 +87,14 @@ test_that("logDetailsParseRecord returns empty list for empty input", {
 test_that("logDetailsParseRecordInstance extracts instance number", {
   test_details <- c("[instance = 123]", "[instance = 456]")
   result <- logDetailsParseRecordInstance(test_details)[[1]]
-  expect_equal(result, '123')
+  expect_equal(result, 123)
 })
 
 # Test case 2: Details without instance number
 test_that("logDetailsParseRecordInstance returns '1' for no instance number", {
   test_details <- c("No instance number")
   result <- logDetailsParseRecordInstance(test_details)[[1]]
-  expected <- "1"
+  expected <- 1
   expect_equal(result, expected)
 })
 
@@ -102,7 +102,7 @@ test_that("logDetailsParseRecordInstance returns '1' for no instance number", {
 test_that("logDetailsParseRecordInstance handles multiple details", {
   test_details <- c("[instance = 789]", "No instance number", "[instance = 1011]")
   result <- logDetailsParseRecordInstance(test_details)
-  expected <- list("789", "1", "1011")
+  expected <- c(789, 1, 1011)
   expect_equal(result, expected)
 })
 
@@ -110,7 +110,7 @@ test_that("logDetailsParseRecordInstance handles multiple details", {
 test_that("logDetailsParseRecordInstance returns '1' for empty details", {
   test_details <- c("")
   result <- logDetailsParseRecordInstance(test_details)
-  expected <- list("1")
+  expected <- c(1)
   expect_equal(result, expected)
 })
 
@@ -118,7 +118,7 @@ test_that("logDetailsParseRecordInstance returns '1' for empty details", {
 test_that("logDetailsParseRecordInstance returns '1' for NA details", {
   test_details <- c(NA)
   result <- logDetailsParseRecordInstance(test_details)
-  expected <- list("1")
+  expected <- c(1)
   expect_equal(result, expected)
 })
 

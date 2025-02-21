@@ -1,3 +1,9 @@
+## Version 0.5.0
+
+### New Features
+
+* Added `logDataTransformer` function to transform log data into a structured data frame.
+
 ## Version 0.4.2
 
 ### New Features

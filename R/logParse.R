@@ -1,5 +1,8 @@
 
 logDetailsParseRecord <- function(details, output_format = "list") {
+  # Remove instance pattern at the beginning
+  details <- gsub("^\\[instance = \\d+\\]\\s*", "", details)
+
   pairs <- strsplit(details, "(?<='| = unchecked| = checked), (?=[\\w]+ = '|[\\w()]+ = )", perl = TRUE)
 
   pattern <- "^(\\w+) = '(.*)'$"
@@ -35,12 +38,12 @@ logDetailsParseRecord <- function(details, output_format = "list") {
         warning(paste('In function logDetailsParseRecord: encountered unparseable content: "', pair, '"'))
       }
     }
-    
+
     if (output_format == "data.frame") {
       if (length(result) > 0) {
-        return(as.data.frame(do.call(rbind, lapply(names(result), function(k) c(field = k, value = result[[k]]))), stringsAsFactors = FALSE))
+        return(as.data.frame(do.call(rbind, lapply(names(result), function(k) c(variable = k, value = result[[k]]))), stringsAsFactors = FALSE))
       } else {
-        return(data.frame(field = character(), value = character(), stringsAsFactors = FALSE))
+        return(data.frame(variable = character(), value = character(), stringsAsFactors = FALSE))
       }
     } else {
       return(result)
@@ -58,7 +61,7 @@ logDetailsParseRecordInstance <- function(details) {
     else{
       return('1')
     }
-  })
+  }) |> unlist() |> as.integer()
 }
 
 logDetailsParseDQ <- function(details) {
