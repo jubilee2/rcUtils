@@ -1,7 +1,7 @@
 Package: rcUtils
 Type: Package
 Title: REDCap Utility Functions
-Version: 0.5.1
+Version: 0.6.0
 Author: Jubilee
 Maintainer: Jubilee<hsi-nien.tan@vumc.org>
 Description: A collection of reusable functions to streamline and enhance the functionality of REDCap projects. This package includes functions for parsing logging strings, converting data types, and more.

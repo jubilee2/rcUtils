@@ -1,3 +1,7 @@
+## Version 0.6.0
+
+### instance fix for logDetailsParseRecord
+
 ## Version 0.5.0
 
 ### New Features
