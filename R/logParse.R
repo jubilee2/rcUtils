@@ -1,7 +1,7 @@
 
 logDetailsParseRecord <- function(details, output_format = "list") {
   # Remove instance pattern at the beginning
-  details <- gsub("^\\[instance = \\d+\\]\\s*", "", details)
+  details <- gsub("^\\[instance = \\d+\\],?\\s*", "", details)
 
   pairs <- strsplit(details, "(?<='| = unchecked| = checked), (?=[\\w]+ = '|[\\w()]+ = )", perl = TRUE)
 

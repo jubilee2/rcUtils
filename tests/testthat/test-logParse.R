@@ -62,6 +62,13 @@ test_that("logDetailsParseRecord works for mixed key-value pairs", {
   expect_equal(result, expected)
 })
 
+test_that("logDetailsParseRecord works for instance", {
+  test_details <- "[instance = 23], cro_id_ind = '1', unit_cro = '1', cro_clinical_isolates_complete = '0'"
+  result <- logDetailsParseRecord(test_details)[[1]]
+  expected <- list(cro_id_ind = "1", unit_cro = "1", cro_clinical_isolates_complete = "0")
+  expect_equal(result, expected)
+})
+
 # Test case 4: Unparseable content
 test_that("logDetailsParseRecord warns for unparseable content", {
   test_details <- "name = 'Bob', invalid_content"
